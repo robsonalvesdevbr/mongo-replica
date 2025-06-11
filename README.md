@@ -3,6 +3,7 @@
 ```bash
 docker exec -it mongo1 mongosh
 mongosh mongodb://localhost:27017,localhost:27018,localhost:27019/?replicaSet=rs0
+sudo bash -c 'echo -e "\n127.0.0.1 mongo1\n127.0.0.1 mongo2\n127.0.0.1 mongo3" >> /etc/hosts'
 ```
 
 ```javascript
