@@ -1,0 +1,42 @@
+services:
+  mongo1:
+    image: mongo:latest
+    container_name: mongo1
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo1_data:/data/db
+    command: mongod --replSet rs0 --bind_ip 0.0.0.0
+    networks:
+      - mongo-cluster
+
+  mongo2:
+    image: mongo:latest
+    container_name: mongo2
+    ports:
+      - "27018:27017" # Mapeando para uma porta diferente no host para evitar conflito
+    volumes:
+      - mongo2_data:/data/db
+    command: mongod --replSet rs0 --bind_ip 0.0.0.0
+    networks:
+      - mongo-cluster
+
+  mongo3:
+    image: mongo:latest
+    container_name: mongo3
+    ports:
+      - "27019:27017" # Mapeando para uma porta diferente no host para evitar conflito
+    volumes:
+      - mongo3_data:/data/db
+    command: mongod --replSet rs0 --bind_ip 0.0.0.0
+    networks:
+      - mongo-cluster
+
+networks:
+  mongo-cluster:
+    driver: bridge
+
+volumes:
+  mongo1_data:
+  mongo2_data:
+  mongo3_data:
