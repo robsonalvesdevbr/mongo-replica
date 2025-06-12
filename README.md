@@ -33,7 +33,9 @@ docker exec -it mongo1 mongosh --eval "rs.status()"
 docker stop mongo1
 docker exec -it mongo2 mongosh --eval "rs.status()"
 
-docker run --rm -v $(pwd)/dump:/dump -it --network=mongo-replica_mongo-cluster mongo mongodump --uri="mongodb://mongo1:27017,mongo2:27017,mongo3:27017/?replicaSet=rs0&authSource=admin&directConnection=true" --out /dump
+docker run --rm -v $(pwd)/dump:/dump -it --network=mongo-replica_mongo-cluster mongo mongodump --uri="mongodb://mongo1:27017,mongo2:27017,mongo3:27017/?replicaSet=rs0&authSource=admin&directConnection=true" --gzip --oplog --out /dump
+
+docker run --rm -v $(pwd)/dump:/dump -it --network=mongo-replica_mongo-cluster mongo mongodump --uri="mongodb://mongo1:27017/?replicaSet=rs0" --gzip --oplog --out /dump
 
 docker run --rm -v $(pwd)/dump:/dump -it --network=mongo-replica_mongo-cluster mongo mongodump --uri="mongodb://mongo1:27017,mongo2:27017,mongo3:27017/?replicaSet=rs0&authSource=admin&directConnection=true" --gzip --archive=/dump/lotes.20250612.archive
 ```
