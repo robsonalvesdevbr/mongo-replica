@@ -6,7 +6,7 @@ services:
       - "27017:27017"
     volumes:
       - mongo1_data:/data/db
-    command: mongod --replSet rs0 --bind_ip localhost,mongo1
+    command: mongod --replSet rs0 --bind_ip 0.0.0.0
     networks:
       - mongo-cluster
 
@@ -17,7 +17,7 @@ services:
       - "27018:27017" # Mapeando para uma porta diferente no host para evitar conflito
     volumes:
       - mongo2_data:/data/db
-    command: mongod --replSet rs0 --bind_ip localhost,mongo2
+    command: mongod --replSet rs0 --bind_ip 0.0.0.0
     networks:
       - mongo-cluster
 
@@ -28,7 +28,7 @@ services:
       - "27019:27017" # Mapeando para uma porta diferente no host para evitar conflito
     volumes:
       - mongo3_data:/data/db
-    command: mongod --replSet rs0 --bind_ip localhost,mongo3
+    command: mongod --replSet rs0 --bind_ip 0.0.0.0
     networks:
       - mongo-cluster
 
